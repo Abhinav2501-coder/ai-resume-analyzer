@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4d181984-04c8-487d-861d-ea107066ed50" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/ai-resume-analyzer.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.prettierrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/app.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/root.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/routes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/routes/home.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/welcome/logo-dark.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/welcome/logo-light.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/welcome/welcome.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/assets/index-BpPGeUcY.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/background.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/fonts/JetBrainsMono-Regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/fonts/JetBrainsSans-Regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/javascript.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/technologies.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/webstorm-icon-logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/webstorm-logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/background.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/JetBrainsMono-Regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/JetBrainsSans-Regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/icons/ats-bad.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/icons/ats-good.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/icons/ats-warning.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/icons/back.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/icons/check.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/icons/cross.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/icons/info.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/icons/pin.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/icons/warning.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/bg-auth.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/bg-main.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/bg-small.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/pdf.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/resume-scan-2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/resume-scan.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/resume_01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/resume_02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/resume_03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/javascript.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/pdf.worker.min.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/technologies.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/webstorm-icon-logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/webstorm-logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/react-router.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="57" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="39ntLdccMr7pt66B5C7RrrLWGo0" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "master",
+    "javascript.preferred.runtime.type.id": "node",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/dubey/WebstormProjects/ai-resume-analyzer/src/main.js",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\dubey\\WebstormProjects\\ai-resume-analyzer\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "ml.llm.LLMAIWorkflowsConfigurable",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "C:\\Users\\dubey\\WebstormProjects\\ai-resume-analyzer\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\dubey\WebstormProjects\ai-resume-analyzer\public" />
+      <recent name="C:\Users\dubey\WebstormProjects\ai-resume-analyzer\public\fonts" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.30387.83" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4d181984-04c8-487d-861d-ea107066ed50" name="Changes" comment="" />
+      <created>1771343612665</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1771343612665</updated>
+      <workItem from="1771343613382" duration="2939000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
