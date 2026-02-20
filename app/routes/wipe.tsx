@@ -13,7 +13,7 @@ const WipeApp = () => {
   };
 
   useEffect(() => {
-    loadFiles().then(r => {});
+    loadFiles();
   }, []);
 
   useEffect(() => {
