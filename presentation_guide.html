@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer - Presentation Guide</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #475569;
+            --bg: #ffffff;
+            --text: #1e293b;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background-color: var(--bg);
+        }
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            border-bottom: 4px solid var(--primary);
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        h2 {
+            background: #f1f5f9;
+            padding: 10px 15px;
+            border-left: 5px solid var(--primary);
+            margin-top: 40px;
+            font-size: 1.5rem;
+        }
+        .qa-item {
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+        .question {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .answer {
+            color: var(--secondary);
+            text-align: justify;
+        }
+        .tech-tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            font-weight: 600;
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI Resume Analyzer Guide</h1>
+
+    <section>
+        <h2>1. Architecture & Tech Stack</h2>
+        
+        <div class="qa-item">
+            <span class="question">Q: Can you walk us through the tech stack used in this project?</span>
+            <div class="answer">
+                <span class="tech-tag">React Router v7</span> <span class="tech-tag">Tailwind CSS</span> <span class="tech-tag">Zustand</span> <span class="tech-tag">Puter.js</span>
+                Our stack is built for performance and modern developer experience. We use React Router v7 for routing and SSR, Tailwind CSS for styling, and Zustand for lightweight global state management. The backend and AI features are powered by Puter.js, which provides instant authentication, KV storage, and direct access to state-of-the-art vision models.
+            </div>
+        </div>
+
+        <div class="qa-item">
+            <span class="question">Q: Why did you choose Zustand instead of Redux or Context API?</span>
+            <div class="answer">
+                Zustand gives us the best of both worlds: the simplicity of Context API without the "provider hell" or unnecessary re-renders, and the power of global state without the overwhelming boilerplate of Redux. It makes our state management (loading states, user auth, errors) extremely clean and scalable.
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Data Processing & Privacy</h2>
+        
+        <div class="qa-item">
+            <span class="question">Q: How do you handle PDF parsing and keep it private?</span>
+            <div class="answer">
+                Privacy is a core feature. We use <strong>pdfjs-dist</strong> to process PDFs entirely in the user's browser. We use a Web Worker to ensure that heavy rendering doesn't freeze the UI. The PDF is converted into a high-resolution image locally, and no sensitive file content is ever uploaded to our own servers before processing.
+            </div>
+        </div>
+
+        <div class="qa-item">
+            <span class="question">Q: Why convert PDF to Image instead of just extracting text?</span>
+            <div class="answer">
+                Text extraction from resumes is notoriously difficult because of complex layouts (columns, bars, icons). By rendering the PDF to a high-resolution PNG via HTML5 Canvas, we preserve the visual hierarchy. Vision AI models can then analyze the resume exactly as a human recruiter would, reading layout cues that pure text extraction would miss.
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. Artificial Intelligence</h2>
+        
+        <div class="qa-item">
+            <span class="question">Q: Which AI model is used and how is it optimized?</span>
+            <div class="answer">
+                We integrate Vision LLMs through <strong>puter.ai.chat</strong>. To get the best results, we use advanced <strong>Prompt Engineering</strong>. We instruct the model to act as a senior technical recruiter and enforce a strict JSON output structure. This allows our frontend to present the data beautifully (gauges, bullet points, scores) rather than just raw text.
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>4. Future Roadmap</h2>
+        
+        <div class="qa-item">
+            <span class="question">Q: If you had more time, what features would you add?</span>
+            <div class="answer">
+                First, I would add <strong>Multi-page PDF support</strong> by stitching images together. Second, I would add <strong>Job Description Matching</strong>, where users can upload a JD and get a percentage match. Finally, I'd implement an AI-driven <strong>one-click resume optimizer</strong> to rewrite bullet points for the user.
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        AI Resume Analyzer | Presentation Preparation Guide | 2026
+    </footer>
+</body>
+</html>
