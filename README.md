@@ -51,4 +51,6 @@ Build an AI-powered Resume Analyzer with React, React Router, and Puter.js! Impl
 
 👉 **Modern UI/UX**: Clean, responsive design built with Tailwind CSS and shadcn/ui for a sleek user experience.
 
+👉 **Master Career Coach Chatbot**: A contextual AI mentor that gives actionable resume tweaks, course recommendations, and tailored project ideas.
+
 And many more, including code architecture and reusability.

@@ -5,6 +5,7 @@ import Summary from "~/components/Summary";
 import ATS from "~/components/ATS";
 import Details from "~/components/Details";
 import { prepareInterviewInstructions, evaluateAnswerInstructions } from "../../constants";
+import MasterCoach from "~/components/MasterCoach";
 
 export const meta = () => ([
     { title: 'Resumind | Review ' },
@@ -138,6 +139,23 @@ const Resume = () => {
         }
     };
 
+    const resumeContext = resumeData && feedback
+        ? `Job Title: ${resumeData.jobTitle || "N/A"}
+Company: ${resumeData.companyName || "N/A"}
+Job Description: ${resumeData.jobDescription || "N/A"}
+Overall Score: ${feedback.overallScore}/100
+ATS Score: ${feedback.ATS?.score || "N/A"}/100
+Tone & Style Score: ${feedback.toneAndStyle?.score || "N/A"}/100
+Content Score: ${feedback.content?.score || "N/A"}/100
+Structure Score: ${feedback.structure?.score || "N/A"}/100
+Skills Score: ${feedback.skills?.score || "N/A"}/100
+ATS Tips: ${(feedback.ATS?.tips || []).map((t: any) => `[${t.type}] ${t.tip}`).join("; ")}
+Tone Tips: ${(feedback.toneAndStyle?.tips || []).map((t: any) => `[${t.type}] ${t.tip}: ${t.explanation || ""}`).join("; ")}
+Content Tips: ${(feedback.content?.tips || []).map((t: any) => `[${t.type}] ${t.tip}: ${t.explanation || ""}`).join("; ")}
+Structure Tips: ${(feedback.structure?.tips || []).map((t: any) => `[${t.type}] ${t.tip}: ${t.explanation || ""}`).join("; ")}
+Skills Tips: ${(feedback.skills?.tips || []).map((t: any) => `[${t.type}] ${t.tip}: ${t.explanation || ""}`).join("; ")}`
+        : "";
+
     return (
         <main className="!pt-0">
             <nav className="resume-nav">
@@ -249,6 +267,9 @@ const Resume = () => {
                     )}
                 </section>
             </div>
+
+            {/* Master Career Coach Chatbot */}
+            {feedback && <MasterCoach resumeContext={resumeContext} />}
         </main>
     )
 }
