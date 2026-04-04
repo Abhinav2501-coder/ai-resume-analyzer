@@ -4,7 +4,7 @@ import { usePuterStore } from "~/lib/puter";
 import Summary from "~/components/Summary";
 import ATS from "~/components/ATS";
 import Details from "~/components/Details";
-import { prepareInterviewInstructions, evaluateAnswerInstructions } from "../../constants";
+import { prepareInterviewInstructions, evaluateAnswerInstructions, prepareCoverLetterInstructions } from "../../constants";
 import MasterCoach from "~/components/MasterCoach";
 
 export const meta = () => ([
@@ -21,6 +21,9 @@ const Resume = () => {
     const [resumeData, setResumeData] = useState<any>(null);
     const [isGeneratingInterview, setIsGeneratingInterview] = useState(false);
     const [interviewQuestions, setInterviewQuestions] = useState<InterviewQuestion[] | null>(null);
+    const [coverLetter, setCoverLetter] = useState<string | null>(null);
+    const [isGeneratingCoverLetter, setIsGeneratingCoverLetter] = useState(false);
+    const [coverLetterCopied, setCoverLetterCopied] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -37,6 +40,9 @@ const Resume = () => {
             setResumeData(data);
             if (data.interview) {
                 setInterviewQuestions(data.interview);
+            }
+            if (data.coverLetter) {
+                setCoverLetter(data.coverLetter);
             }
 
             const resumeBlob = await fs.read(data.resumePath);
@@ -89,6 +95,61 @@ const Resume = () => {
         } finally {
             setIsGeneratingInterview(false);
         }
+    };
+
+    const handleGenerateCoverLetter = async () => {
+        if (!resumeData) return;
+        setIsGeneratingCoverLetter(true);
+        setCoverLetter(null);
+        setCoverLetterCopied(false);
+
+        try {
+            const { companyName, jobTitle, jobDescription, resumePath } = resumeData;
+            const instructions = prepareCoverLetterInstructions({ companyName, jobTitle, jobDescription });
+
+            const response = await ai.feedback(resumePath, instructions);
+            if (!response) {
+                console.error("Failed to generate cover letter");
+                setIsGeneratingCoverLetter(false);
+                return;
+            }
+
+            const responseText = typeof response.message.content === 'string'
+                ? response.message.content
+                : response.message.content[0].text;
+
+            setCoverLetter(responseText.trim());
+
+            // Save to KV
+            const updatedData = { ...resumeData, coverLetter: responseText.trim() };
+            await kv.set(`resume:${id}`, JSON.stringify(updatedData));
+            setResumeData(updatedData);
+        } catch (error) {
+            console.error("Error generating cover letter:", error);
+        } finally {
+            setIsGeneratingCoverLetter(false);
+        }
+    };
+
+    const handleCopyCoverLetter = () => {
+        if (!coverLetter) return;
+        navigator.clipboard.writeText(coverLetter);
+        setCoverLetterCopied(true);
+        setTimeout(() => setCoverLetterCopied(false), 2500);
+    };
+
+    const handleDownloadCoverLetter = () => {
+        if (!coverLetter) return;
+        const blob = new Blob([coverLetter], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        const filename = resumeData?.jobTitle ? `Cover_Letter_${resumeData.jobTitle.replace(/[^a-z0-9]/gi, '_')}.txt` : 'Cover_Letter.txt';
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
     };
 
     const handleAnswerChange = (idx: number, value: string) => {
@@ -185,6 +246,80 @@ Skills Tips: ${(feedback.skills?.tips || []).map((t: any) => `[${t.type}] ${t.ti
                             <Summary feedback={feedback} />
                             <ATS score={feedback.ATS.score || 0} suggestions={feedback.ATS.tips || []} />
                             <Details feedback={feedback} />
+
+                            {/* Cover Letter Generator */}
+                            <hr className="my-8 border-gray-200" />
+                            <div className="flex flex-col gap-4" id="cover-letter-section">
+                                <div className="flex items-center gap-3">
+                                    <span className="text-2xl">✉️</span>
+                                    <h3 className="text-2xl font-bold text-black">Cover Letter Generator</h3>
+                                </div>
+                                <p className="text-sm text-gray-500">Generate a tailored, persuasive cover letter that highlights exactly where your skills match this job.</p>
+
+                                {!coverLetter && !isGeneratingCoverLetter && (
+                                    <button
+                                        onClick={handleGenerateCoverLetter}
+                                        className="cover-letter-generate-btn w-fit mt-2"
+                                        id="generate-cover-letter-btn"
+                                    >
+                                        <span className="cover-letter-btn-icon">✨</span>
+                                        Generate Cover Letter for this Job
+                                    </button>
+                                )}
+
+                                {isGeneratingCoverLetter && (
+                                    <div className="cover-letter-loading">
+                                        <div className="cover-letter-loading-bar" />
+                                        <div className="cover-letter-loading-bar delay-1" />
+                                        <div className="cover-letter-loading-bar delay-2" />
+                                        <p className="text-sm text-gray-400 mt-4 animate-pulse">Crafting your cover letter with AI...</p>
+                                    </div>
+                                )}
+
+                                {coverLetter && (
+                                    <div className="cover-letter-card animate-in fade-in duration-700">
+                                        <div className="cover-letter-card-header">
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-lg">📄</span>
+                                                <span className="font-semibold text-gray-800">Your Cover Letter</span>
+                                            </div>
+                                            <div className="flex gap-2">
+                                                <button
+                                                    onClick={handleCopyCoverLetter}
+                                                    className="cover-letter-copy-btn"
+                                                    id="copy-cover-letter-btn"
+                                                >
+                                                    {coverLetterCopied ? (
+                                                        <><span>✅</span> Copied!</>
+                                                    ) : (
+                                                        <><span>📋</span> Copy to Clipboard</>
+                                                    )}
+                                                </button>
+                                                <button
+                                                    onClick={handleGenerateCoverLetter}
+                                                    className="cover-letter-regen-btn"
+                                                    id="regenerate-cover-letter-btn"
+                                                    title="Regenerate"
+                                                >
+                                                    🔄 Regenerate
+                                                </button>
+                                                <button
+                                                    onClick={handleDownloadCoverLetter}
+                                                    className="cover-letter-copy-btn"
+                                                    id="download-cover-letter-btn"
+                                                >
+                                                    ⬇️ Download
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div className="cover-letter-body">
+                                            {coverLetter.split('\n\n').map((paragraph, idx) => (
+                                                <p key={idx} className="cover-letter-paragraph">{paragraph}</p>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
 
                             <hr className="my-8 border-gray-200" />
                             <div className="flex flex-col gap-4">

@@ -285,3 +285,29 @@ export const evaluateAnswerInstructions = ({ question, hint, userAnswer }: { que
       ${EvaluateResponseFormat}
       
       Return ONLY the JSON object, without any backticks, markdown formatting, or conversational text.`;
+
+export const prepareCoverLetterInstructions = ({
+    companyName,
+    jobTitle,
+    jobDescription,
+}: {
+    companyName: string;
+    jobTitle: string;
+    jobDescription: string;
+}) =>
+    `You are an expert career coach and professional copywriter.
+The candidate is applying for the role of "${jobTitle}" at "${companyName}".
+
+Job Description:
+${jobDescription}
+
+Based on the attached resume and the job description above, write a highly persuasive, customized 3-paragraph cover letter.
+
+Rules:
+1. Write exactly 3 paragraphs.
+2. Paragraph 1: A strong opening expressing enthusiasm for the specific role and company, with a hook about why the candidate is a great fit.
+3. Paragraph 2: The core pitch — focus EXACTLY on where the candidate's specific skills and past experiences match the job description's requirements. Use concrete examples from the resume.
+4. Paragraph 3: A confident closing paragraph reaffirming their fit and a call to action for an interview.
+5. Tone: Professional, confident, and persuasive.
+6. Sign-off: End the letter with "Sincerely," followed by the candidate's ACTUAL real name extracted from the top of the attached resume. NEVER invent or make up a random name. If you absolutely cannot find a name, just write "Sincerely,". Do NOT use placeholders.
+7. Output ONLY the cover letter text — no introductory remarks, no sign-off metadata, no markdown formatting.`;

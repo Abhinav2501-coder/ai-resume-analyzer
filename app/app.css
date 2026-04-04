@@ -142,6 +142,74 @@ form {
   backdrop-filter: blur(10px);
 }
 
+@layer components {
+  /* Cover Letter Generator Styles */
+  .cover-letter-generate-btn {
+    @apply flex items-center gap-2 text-white font-semibold py-3 px-6 rounded-full cursor-pointer transition-all duration-300;
+    background: linear-gradient(135deg, #606beb, #8e98ff, #a78bfa);
+    box-shadow: 0 4px 15px rgba(96, 107, 235, 0.35);
+  }
+  .cover-letter-generate-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 25px rgba(96, 107, 235, 0.5);
+  }
+  .cover-letter-btn-icon {
+    @apply text-lg;
+    animation: sparkle 1.5s ease-in-out infinite;
+  }
+  .cover-letter-loading {
+    @apply flex flex-col gap-3 py-6;
+  }
+  .cover-letter-loading-bar {
+    @apply h-4 rounded-full;
+    background: linear-gradient(90deg, #e8ecf4 25%, #d1d9e8 50%, #e8ecf4 75%);
+    background-size: 200% 100%;
+    animation: coverLetterShimmer 1.5s ease-in-out infinite;
+  }
+  .cover-letter-loading-bar:nth-child(1) { width: 100%; }
+  .cover-letter-loading-bar:nth-child(2) { width: 85%; animation-delay: 0.2s; }
+  .cover-letter-loading-bar:nth-child(3) { width: 60%; animation-delay: 0.4s; }
+
+  .cover-letter-card {
+    @apply bg-white rounded-2xl border border-gray-200 overflow-hidden;
+    box-shadow: 0 4px 24px rgba(96, 107, 235, 0.08), 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .cover-letter-card-header {
+    @apply flex items-center justify-between px-6 py-4 border-b border-gray-100 flex-wrap gap-3;
+    background: linear-gradient(to right, #f8f9ff, #f0f2ff);
+  }
+  .cover-letter-body {
+    @apply px-6 py-6;
+  }
+  .cover-letter-paragraph {
+    @apply text-gray-700 leading-relaxed text-base mb-4 last:mb-0;
+  }
+  .cover-letter-copy-btn {
+    @apply flex items-center gap-1.5 text-sm font-medium px-4 py-2 rounded-xl border border-gray-200 bg-white text-gray-700 cursor-pointer transition-all duration-200;
+  }
+  .cover-letter-copy-btn:hover {
+    @apply bg-gray-50 border-gray-300;
+    transform: translateY(-1px);
+  }
+  .cover-letter-regen-btn {
+    @apply flex items-center gap-1.5 text-sm font-medium px-4 py-2 rounded-xl border border-indigo-200 bg-indigo-50 text-indigo-700 cursor-pointer transition-all duration-200;
+  }
+  .cover-letter-regen-btn:hover {
+    @apply bg-indigo-100 border-indigo-300;
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes coverLetterShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes sparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50% { transform: scale(1.2) rotate(10deg); opacity: 0.8; }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
