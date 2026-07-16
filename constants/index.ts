@@ -311,3 +311,131 @@ Rules:
 5. Tone: Professional, confident, and persuasive.
 6. Sign-off: End the letter with "Sincerely," followed by the candidate's ACTUAL real name extracted from the top of the attached resume. NEVER invent or make up a random name. If you absolutely cannot find a name, just write "Sincerely,". Do NOT use placeholders.
 7. Output ONLY the cover letter text — no introductory remarks, no sign-off metadata, no markdown formatting.`;
+
+export const TailoredResumeFormat = `
+{
+  "full_name": "string",
+  "contact_info": {
+    "email": "string",
+    "phone": "string",
+    "location": "string",
+    "linkedin": "string",
+    "portfolio": "string"
+  },
+  "professional_summary": "string",
+  "experience": [
+    {
+      "company": "string",
+      "position": "string",
+      "location": "string",
+      "duration": "string",
+      "bullet_points": ["string"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "string",
+      "degree": "string",
+      "location": "string",
+      "duration": "string"
+    }
+  ],
+  "skills": {
+    "technical": ["string"],
+    "soft": ["string"]
+  },
+  "projects": [
+    {
+      "name": "string",
+      "description": "string",
+      "bullet_points": ["string"]
+    }
+  ],
+  "certifications": ["string"]
+}`;
+
+export const prepareTailoringInstructions = ({
+    jobTitle,
+    jobDescription,
+    currentFeedback,
+}: {
+    jobTitle: string;
+    jobDescription: string;
+    currentFeedback: string;
+}) =>
+    `You are an elite ATS Resume Optimizer. Your ONLY goal is to rewrite the attached resume so that when re-analyzed by an ATS resume analyzer, it scores 95-100 in EVERY category.
+
+The analyzer scores resumes on exactly these 5 categories (each out of 100):
+1. ATS Score - keyword matching, standard formatting, parsability
+2. Tone & Style Score - professional language, active voice, confidence, no filler
+3. Content Score - achievements, quantified results, relevance to role
+4. Structure Score - section hierarchy, order, completeness, readability
+5. Skills Score - keyword coverage from JD, technical + soft skill balance
+
+TARGET JOB ROLE: "${jobTitle}"
+
+TARGET JOB DESCRIPTION:
+${jobDescription}
+
+CURRENT FLAWS THE ANALYZER FOUND (you MUST fix ALL of these):
+${currentFeedback}
+
+============================
+CATEGORY-SPECIFIC OPTIMIZATION RULES:
+============================
+
+▸ ATS OPTIMIZATION (target: 95-100):
+- Extract EVERY technical keyword, tool, framework, methodology, and certification mentioned in the Job Description
+- Integrate each keyword naturally into Experience bullet points, Skills section, or Professional Summary
+- Use EXACT keyword matches (e.g., if JD says "React.js", write "React.js" not just "React")
+- Use standard section headers ONLY: "Professional Summary", "Experience", "Education", "Skills", "Projects", "Certifications"
+- No tables, columns, headers/footers, images, or special characters that break ATS parsers
+- Spell out acronyms at least once (e.g., "Continuous Integration/Continuous Deployment (CI/CD)")
+
+▸ TONE & STYLE OPTIMIZATION (target: 95-100):
+- Start EVERY bullet point with a strong, unique action verb. Use a DIFFERENT verb for each bullet. Examples: Architected, Spearheaded, Orchestrated, Engineered, Accelerated, Streamlined, Pioneered, Championed, Delivered, Transformed, Elevated, Optimized
+- Eliminate ALL passive voice ("was responsible for" → "Led", "was involved in" → "Drove")
+- Remove ALL filler words: "various", "several", "helped", "assisted", "worked on", "responsible for", "involved in"
+- Tone must be confident, direct, and results-oriented throughout
+- Professional Summary must be authoritative and role-specific, not generic
+- Eliminate first-person pronouns (no "I", "my", "me")
+
+▸ CONTENT OPTIMIZATION (target: 95-100):
+- EVERY bullet point must use the Google XYZ formula: "Accomplished [X] as measured by [Y], by doing [Z]"
+- Add specific metrics to EVERY achievement. If the original has no metrics, add realistic placeholders: "[Achieved X% improvement in Y]" or "[Reduced Z by X%, saving $Y annually]"
+- Each experience entry must have 4-6 bullet points showing impact
+- Professional Summary must directly address the target role requirements
+- Content must demonstrate clear alignment between candidate's experience and the JD requirements
+- Show progression and increasing responsibility across roles
+
+▸ STRUCTURE OPTIMIZATION (target: 95-100):
+- Section order MUST be: Professional Summary → Experience → Skills → Education → Projects → Certifications
+- Experience entries must be in reverse chronological order
+- Each experience entry must include: Position Title, Company Name, Location, Date Range, and 4-6 bullet points
+- Education must include: Institution, Degree, Location, Graduation Date
+- Skills must be split into "technical" and "soft" categories
+- Every section must be present and populated (no empty sections)
+
+▸ SKILLS OPTIMIZATION (target: 95-100):
+- List EVERY technical skill mentioned in the Job Description that the candidate has evidence of
+- Include programming languages, frameworks, tools, platforms, methodologies
+- Add relevant soft skills demonstrated in their experience: Leadership, Communication, Problem-Solving, Collaboration, Project Management, etc.
+- Skills must appear BOTH in the Skills section AND naturally within Experience bullet points
+- Minimum 8-12 technical skills and 4-6 soft skills
+
+============================
+ABSOLUTE RULES:
+============================
+- DO NOT fabricate new jobs, companies, degrees, dates, or certifications
+- DO NOT change the candidate's name, contact info, or factual employment history
+- You CAN rephrase, restructure, reorder, and enhance the expression of existing facts
+- You CAN add metric placeholders where real numbers don't exist
+- You CAN infer and list skills that are clearly demonstrated in their experience even if unlisted
+- EVERY "improve" flaw listed above MUST have a corresponding fix in your output
+
+OUTPUT FORMAT:
+Return the optimized resume as a strictly valid JSON object following this exact schema:
+${TailoredResumeFormat}
+
+Return ONLY the JSON object. No backticks, no markdown, no explanation, no conversation.`;
+
