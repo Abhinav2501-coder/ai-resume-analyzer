@@ -48,37 +48,6 @@ This project analyzes resumes (PDF) and provides ATS-style scoring and actionabl
 - State: Zustand
 - Platform & AI: Puter.js (auth, storage, AI calls)
 
-Architecture
-
-This section describes the high-level components, data flow, and integrations used by the project. The application is designed as a client-first SPA that leverages Puter.js for auth, storage, and AI calls so most processing and orchestration happen in the browser.
-
-```mermaid
-flowchart LR
-  U[User Browser]
-  subgraph Frontend[React SPA]
-    U --> UI[UI Components\n(app/components)]
-    UI --> Upload[FileUploader / Upload]
-    Upload --> PDF2IMG[PDF → Image\n(app/lib/pdf2img.ts)]
-    PDF2IMG --> OCR[OCR / Text Extraction]
-    UI --> Coach[MasterCoach Chatbot]
-    UI --> Score[Scoring UI / Badges]
-  end
-
-  Frontend --> Puter[Puter.js\n(Auth, Storage, AI)]
-  Puter --> Storage[Object Storage]
-  Puter --> AI[LLM / OCR Providers]
-  AI --> Model[LLM / OCR Services]
-
-  classDef infra fill:#f8f9fa,stroke:#333,stroke-width:1px;
-  class Puter,Storage,AI,Model infra;
-```
-
-Key architecture notes
-- Frontend-only SPA: all UI code lives in `app/components/` and `app/routes/`.
-- Processing helpers and AI glue code are in `app/lib/` (see `pdf2img.ts`, `puter.ts`, `utils.ts`).
-- Data flow: user uploads PDF → convert pages to images → OCR/text extraction → create prompt → call AI via Puter → present score and feedback.
-- Authentication & storage: Puter.js handles client auth flows and stores files/user data in Puter-backed storage.
-- Deployment: app can be served as static files (Vite build) from CDN or static hosting; Puter.js remains the runtime integration for auth and AI.
 
 
 ## <a name="getting-started">Getting started (local)</a>
