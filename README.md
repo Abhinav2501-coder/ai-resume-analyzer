@@ -1,56 +1,141 @@
-## 📋 <a name="table">Table of Contents</a>
+## AI Resume Analyzer
 
-1. ✨ [Introduction](#introduction)
-2. ⚙️ [Tech Stack](#tech-stack)
-3. 🔋 [Features](#features)
-4. 🤸 [Quick Start](#quick-start)
-5. 🔗 [Assets](#links)
-6. 🚀 [More](#more)
+AI Resume Analyzer is a single-page React + TypeScript application that helps candidates and recruiters evaluate resumes quickly using AI-driven scoring, tailored feedback, and a contextual coaching chatbot. The app demonstrates how a modern front-end app can integrate client-side storage, serverless auth, and LLM-based evaluation with minimal backend work using Puter.js.
+
+---
+
+## 📋 Table of contents
+
+1. [About](#about)
+2. [Key features](#key-features)
+3. [Real-world advantages](#advantages)
+4. [Tech stack & architecture](#tech-stack--architecture)
+5. [Getting started (local)](#getting-started)
+6. [AI integration & Puter.js details](#ai-integration--puterjs)
+7. [Repo pointers (where code lives)](#repo-pointers)
+8. [Run & build commands](#run--build)
+9. [Contributing & License](#contributing)
+
+
+## <a name="about">About</a>
+
+This project analyzes resumes (PDF) and provides ATS-style scoring and actionable feedback using client-side integrations with Puter.js and LLM services. It is intended as a demo and starter kit for building privacy-forward, low-backend recruitment tooling.
+
+
+## <a name="key-features">Key features</a>
+
+- Upload and manage multiple resumes (PDF)
+- Persistent resume storage using Puter-backed storage
+- AI-powered resume scoring and matching to job descriptions
+- Contextual coaching chatbot (Master Career Coach)
+- Reusable React components and responsive UI
+- Visual score badges and summary reports
+
+
+## <a name="advantages">Real-world advantages</a>
+
+- Faster, more consistent candidate screening with quantitative scores
+- Tailored, actionable feedback to help candidates improve
+- Privacy-first design: data can be kept client-controlled via Puter
+- Low infrastructure cost and easier deployment (minimal backend)
+
+
+## <a name="tech-stack--architecture">Tech stack & architecture</a>
+
+- Frontend: React + TypeScript
+- Bundler / dev server: Vite
+- Styling: Tailwind CSS (plus shadcn/ui patterns)
+- State: Zustand
+- Platform & AI: Puter.js (auth, storage, AI calls)
+
+Architecture
+
+This section describes the high-level components, data flow, and integrations used by the project. The application is designed as a client-first SPA that leverages Puter.js for auth, storage, and AI calls so most processing and orchestration happen in the browser.
+
+```mermaid
+flowchart LR
+  U[User Browser]
+  subgraph Frontend[React SPA]
+    U --> UI[UI Components\n(app/components)]
+    UI --> Upload[FileUploader / Upload]
+    Upload --> PDF2IMG[PDF → Image\n(app/lib/pdf2img.ts)]
+    PDF2IMG --> OCR[OCR / Text Extraction]
+    UI --> Coach[MasterCoach Chatbot]
+    UI --> Score[Scoring UI / Badges]
+  end
+
+  Frontend --> Puter[Puter.js\n(Auth, Storage, AI)]
+  Puter --> Storage[Object Storage]
+  Puter --> AI[LLM / OCR Providers]
+  AI --> Model[LLM / OCR Services]
+
+  classDef infra fill:#f8f9fa,stroke:#333,stroke-width:1px;
+  class Puter,Storage,AI,Model infra;
+```
+
+Key architecture notes
+- Frontend-only SPA: all UI code lives in `app/components/` and `app/routes/`.
+- Processing helpers and AI glue code are in `app/lib/` (see `pdf2img.ts`, `puter.ts`, `utils.ts`).
+- Data flow: user uploads PDF → convert pages to images → OCR/text extraction → create prompt → call AI via Puter → present score and feedback.
+- Authentication & storage: Puter.js handles client auth flows and stores files/user data in Puter-backed storage.
+- Deployment: app can be served as static files (Vite build) from CDN or static hosting; Puter.js remains the runtime integration for auth and AI.
+
+
+## <a name="getting-started">Getting started (local)</a>
+
+Prerequisites
+- Node.js 18+ and npm / pnpm / yarn
+- (Optional) a Puter account if you want to use hosted Puter services
+
+Clone and install
+
+```bash
+git clone https://example.com/your-repo.git
+cd ai-resume-analyzer
+npm install
+```
+
+Environment & Puter configuration
+- Create a `.env.local` in the project root for any API keys or client IDs.
+- This repository reads Puter-related initialization from `app/lib/puter.ts` — inspect that file for required values and expected environment variable names.
+
+Run locally
+
+```bash
+npm run dev
+# open http://localhost:5173
+```
+
+
+## <a name="ai-integration--puterjs">AI integration & Puter.js details</a>
+
+- Puter.js provides client-side auth, storage, and helpers to call AI (LLMs) and OCR services without a dedicated backend.
+- In this project the key AI responsibilities are:
+  - PDF processing and page-to-image conversion (`app/lib/pdf2img.ts`)
+  - Text extraction and OCR (where enabled)
+  - Prompting LLMs to score and summarize resumes via Puter client calls (`app/lib/puter.ts`)
+  - Chatbot context and memory for the MasterCoach feature
+
+How to adapt AI behavior
+- Edit `app/lib/puter.ts` to change model selection, API endpoints, or prompt structure.
+- Prompt templates and helpers can be found/extended in `app/lib/utils.ts`.
+
+
+## <a name="repo-pointers">Repo pointers (where code lives)</a>
+
+- Main UI: `app/root.tsx`, `app/routes.ts`, `app/app.css`
+- Components: `app/components/` (Accordion, FileUploader, MasterCoach, ResumeCard, ScoreBadge, etc.)
+- AI / platform helpers: `app/lib/` (pdf2img.ts, puter.ts, utils.ts)
+- Types: `types/` and `app/puter.d.ts`
+
+
+## <a name="run--build">Run & build</a>
+
+- Install dependencies: `npm install`
+- Start dev server: `npm run dev`
+- Build production bundle: `npm run build`
+- Preview production build: `npm run preview`
 
 
 
 
-
-## <a name="introduction">✨ Introduction</a>
-
-Build an AI-powered Resume Analyzer with React, React Router, and Puter.js! Implement seamless auth, upload and store resumes, and match candidates to jobs using smart AI evaluations. Get custom feedback and ATS scores tailored to each listing—all wrapped in a clean, reusable UI.
-
-
-
-## <a name="tech-stack">⚙️ Tech Stack</a>
-
-- **[React](https://react.dev/)** is a popular open‑source JavaScript library for building user interfaces using reusable components and a virtual DOM, enabling efficient, dynamic single-page and native apps.
-
-- **[React Router v7](https://reactrouter.com/)** is the go‑to routing library for React apps, offering nested routes, data loaders/actions, error boundaries, code splitting, and SSR support—all with a smooth upgrade path from v6.
-
-- **[Puter.com](https://jsm.dev/resumind-puter)** is an advanced, open-source internet operating system designed to be feature-rich, exceptionally fast, and highly extensible. Puter can be used as: A privacy-first personal cloud to keep all your files, apps, and games in one secure place, accessible from anywhere at any time.
-
-- **[Puter.js](https://jsm.dev/resumind-puterjs)** is a tiny client‑side SDK that adds serverless auth, storage, database, and AI (GPT, Claude, DALL·E, OCR…) straight into your browser app—no backend needed and costs borne by users.
-
-- **[Tailwind CSS](https://tailwindcss.com/)** is a utility-first CSS framework that allows developers to design custom user interfaces by applying low-level utility classes directly in HTML, streamlining the design process.
-
-- **[TypeScript](https://www.typescriptlang.org/)** is a superset of JavaScript that adds static typing, providing better tooling, code quality, and error detection for developers, making it ideal for building large-scale applications.
-
-- **[Vite](https://vite.dev/)** is a fast build tool and dev server using native ES modules for instant startup, hot‑module replacement, and Rollup‑powered production builds—perfect for modern web development.
-
-- **[Zustand](https://github.com/pmndrs/zustand)** is a minimal, hook-based state management library for React. It lets you manage global state with zero boilerplate, no context providers, and excellent performance through selective state subscriptions.
-
-## <a name="features">🔋 Features</a>
-
-👉 **Easy & convenient auth**: Handle authentication entirely in the browser using Puter.js—no backend or setup required.
-
-👉 **Resume upload & storage**: Let users upload and store all their resumes in one place, safely and reliably.
-
-👉 **AI resume matching**: Provide a job listing and get an ATS score with custom feedback tailored to each resume.
-
-👉 **Reusable, modern UI**: Built with clean, consistent components for a great-looking and maintainable interface.
-
-👉 **Code Reusability**: Leverage reusable components and a modular codebase for efficient development.
-
-👉 **Cross-Device Compatibility**: Fully responsive design that works seamlessly across all devices.
-
-👉 **Modern UI/UX**: Clean, responsive design built with Tailwind CSS and shadcn/ui for a sleek user experience.
-
-👉 **Master Career Coach Chatbot**: A contextual AI mentor that gives actionable resume tweaks, course recommendations, and tailored project ideas.
-
-And many more, including code architecture and reusability.
